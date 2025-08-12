@@ -6,22 +6,19 @@ A Java Spring Boot application that manages a to-do list with CRUD operations, b
 Includes automated startup via a `startup.sh` script and API documentation via Swagger.
 
 ---
-
 ## 📚 Table of Contents
 
-1. [🚀 Features](#-features)
+1. [Features](#features)
 2. [Tech Stack](#tech-stack)
 3. [Architecture](#architecture)
 4. [API Endpoints](#api-endpoints)
 5. [Setup & Installation](#setup--installation)
 6. [Running the Application](#running-the-application)
 7. [Swagger API Documentation](#swagger-api-documentation)
-8. [Project Structure](#project-structure)
-9. [Requirements Check](#requirements-check)
-
+8. [Requirements Check](#requirements-check)
 ---
 
-## 🚀 Features 
+## Features
 
 * Create, Read, Update, Delete (CRUD) to-do items.
 * MySQL database with persistent storage using Docker volumes.
@@ -32,7 +29,7 @@ Includes automated startup via a `startup.sh` script and API documentation via S
 
 ---
 
-## 🛠 Tech Stack
+## Tech Stack
 
 * **Java 24 (Temurin JDK)**
 * **Spring Boot**
@@ -42,16 +39,38 @@ Includes automated startup via a `startup.sh` script and API documentation via S
 
 ---
 
-## 🏗 Architecture
+## Architecture
 
-* **Spring Boot**: REST API server with business logic and data persistence.
-* **MySQL**: Stores to-do list data.
-* **Docker Compose**: Orchestrates application and database containers.
-* **Docker Volume**: Ensures MySQL data persistence.
+This project follows a **three-layer architecture** to separate concerns:
+
+1. **Repository Layer**  
+   - Responsible for all database access and persistence.  
+   - Uses **Spring Data JPA** to map Java objects to database records.  
+   - Contains interfaces (e.g., `ItemRepository`) that extend `JpaRepository`, allowing CRUD operations without boilerplate SQL.
+
+2. **Service Layer**  
+   - Contains the **business logic** of the application.  
+   - Receives requests from the controller, processes data, applies rules, and interacts with the repository.  
+   - Defined via a **service interface** (`ItemServiceIF`) and an **implementation class** (`ItemServiceImpl`).
+
+3. **Controller Layer**  
+   - Handles **HTTP requests** and **responses**.  
+   - Uses Spring’s `@RestController` and request mapping annotations (`@GetMapping`, `@PostMapping`, etc.).  
+   - Accepts and validates request data (DTOs), calls the service layer, and formats the API responses.
+
+**Flow of a request:**  
+`Client → Controller → Service → Repository → Database → Service → Controller → Client`
+
+**Benefits of this architecture:**  
+- Clear **separation of concerns**.  
+- **Testability** — each layer can be tested independently.  
+- **Maintainability** — changes in one layer have minimal impact on others.  
+- **Scalability** — easy to extend functionality without breaking existing code.
+
 
 ---
 
-## 📌 API Endpoints
+## API Endpoints
 
 | Method | Endpoint          | Description                     |
 | ------ | ----------------- | ------------------------------- |
@@ -65,7 +84,7 @@ Example API request/response formats are documented in **Swagger**.
 
 ---
 
-## ⚙️ Setup & Installation
+## Setup & Installation
 
 1. **Clone the Repository**
 
@@ -88,7 +107,7 @@ Example API request/response formats are documented in **Swagger**.
 
 ---
 
-## ▶ Running the Application
+## Running the Application
 
 **Run using startup script**:
 
@@ -100,28 +119,16 @@ Example API request/response formats are documented in **Swagger**.
 
 ---
 
-## 📄 Swagger API Documentation
+## Swagger API Documentation
 
 Once the application is running, visit:
 **[http://localhost:10279/swagger-ui.html](http://localhost:10279/swagger-ui.html)**
 
 ---
 
-## 📂 Project Structure
 
-```
-todo-list-app/
-│── src/                   # Java source code
-│── pom.xml                # Maven dependencies
-│── Dockerfile             # App container setup
-│── docker-compose.yml     # Multi-container orchestration
-│── startup.sh             # Startup automation script
-│── README.md              # Project documentation
-```
 
----
-
-## ✅ Requirements Check
+## Requirements Check
 
 | Requirement                                                            | Status |
 | ---------------------------------------------------------------------- | ------ |
@@ -136,7 +143,4 @@ todo-list-app/
 | Data persistence with Docker volume                                    | ✅ Done |
 | Startup bash script                                                    | ✅ Done |
 
----
 
-Do you want me to go ahead and **commit this README.md** directly to your repo so it’s live on GitHub?
-It will make your repository look much more professional.
