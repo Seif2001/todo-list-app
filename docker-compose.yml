@@ -1,0 +1,36 @@
+version: '3.9'
+
+services:
+  mysql-db:
+    image: mysql:8.0
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: password
+      MYSQL_DATABASE: todo_db          # Optional: initial database created
+    volumes:
+      - mysql-data:/var/lib/mysql
+    networks:
+      - app-network
+    ports: []  # no ports exposed to host
+
+  todo-app:
+    build: .
+    restart: always
+    ports:
+      - "10279:8080"   # expose container's 8080 to host 10279
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:mysql://mysql-db:3306/todo_db
+      SPRING_DATASOURCE_USERNAME: root
+      SPRING_DATASOURCE_PASSWORD: password
+      SPRING_JPA_HIBERNATE_DDL_AUTO: update
+    depends_on:
+      - mysql-db
+    networks:
+      - app-network
+
+volumes:
+  mysql-data:
+
+networks:
+  app-network:
+    driver: bridge
