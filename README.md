@@ -85,6 +85,7 @@ Example API request/response formats are documented in **Swagger**.
 ---
 
 ## Setup & Installation
+**Ensure that Java runtime and Docker are installed**
 
 1. **Clone the Repository**
 
@@ -108,6 +109,7 @@ Example API request/response formats are documented in **Swagger**.
 ---
 
 ## Running the Application
+
 
 **Run using startup script**:
 
