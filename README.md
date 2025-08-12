@@ -1,6 +1,4 @@
-Here’s an improved GitHub-ready `README.md` with a **Table of Contents**, clear sections, and professional formatting based on your implementation and the provided requirements.
 
----
 
 # 📝 To-Do List Application
 
