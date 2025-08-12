@@ -9,7 +9,7 @@ Includes automated startup via a `startup.sh` script and API documentation via S
 
 ## 📚 Table of Contents
 
-1. [Features](#features)
+1. [🚀 Features](#-features)
 2. [Tech Stack](#tech-stack)
 3. [Architecture](#architecture)
 4. [API Endpoints](#api-endpoints)
@@ -21,7 +21,7 @@ Includes automated startup via a `startup.sh` script and API documentation via S
 
 ---
 
-## 🚀 Features
+## 🚀 Features 
 
 * Create, Read, Update, Delete (CRUD) to-do items.
 * MySQL database with persistent storage using Docker volumes.
