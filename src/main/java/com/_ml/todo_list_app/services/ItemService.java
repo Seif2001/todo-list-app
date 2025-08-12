@@ -1,5 +1,6 @@
 package com._ml.todo_list_app.services;
 
+import com._ml.todo_list_app.dtos.ItemDTO;
 import com._ml.todo_list_app.exceptions.ItemCreationException;
 import com._ml.todo_list_app.models.Item;
 import com._ml.todo_list_app.repositories.ItemRepository;
@@ -39,7 +40,7 @@ public class ItemService implements ItemServiceIF{
         }
     }
 
-    public Item updateItem(Long id, Item updatedItem) {
+    public Item updateItem(Long id, ItemDTO updatedItem) {
         Item existingItem = itemRepository.findById(id)
                 .orElseThrow(() -> new NoSuchElementException("Item not found with id " + id));
 
